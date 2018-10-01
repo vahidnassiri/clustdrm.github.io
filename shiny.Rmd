@@ -20,9 +20,10 @@ The Data tab can be used to upload the dataset. It should be a `.csv` file in a
 correct format. The following figure shows the first view after running
 the Shiny app.
 
-```{r shinyEntry, echo = FALSE , fig.cap  = "First view of the Shiny app after running.", fig.width = 12, warnings = FALSE, error = FALSE, message = 'hide'}
-knitr::include_graphics("imgs/shinyFirst.png")
-```
+
+
+![]("imgs/shinyFirst.png)
+
 After uploading a `.csv` data file via the Data tab, one needs to select the
 columns in the data corresponding to the name of the variables, also ID, dose,
 and response, as well as the added covariates (if any). After uploading the
@@ -32,9 +33,8 @@ used here, so plotting the same compound another time would produce slightly
 different results. The following figure shows an example of using Data
 tab.
 
-```{r shinyData, echo = FALSE , fig.cap  = "Data tab of the Shiny app.", fig.width = 12, warnings = FALSE, error = FALSE, message = 'hide'}
-knitr::include_graphics("imgs/shinyData.png")
-```
+
+![]("imgs/shinyData.png)
 
 ## Clustering tab
 
@@ -56,9 +56,8 @@ the identified patterns. The following figure shows the use of this
 tab.
 
 
-```{r shinyClustering, echo = FALSE , fig.cap  = "Clustering tab of the Shiny app.", fig.width = 12, warnings = FALSE, error = FALSE, message = 'hide'}
-knitr::include_graphics("imgs/shinyClustering.png")
-```
+![]("imgs/shinyClustering.png)
+
 
 Note that, some arguments are pre-specified in the Shiny app while using the
 functions available via the `clustDRM` package they can be customized. For the
@@ -83,9 +82,9 @@ dose-response data will be displayed with a vertical line indicating the
 estimated EDp. The following figure shows an example of the use of
 this tab.
 
-```{r shinyModelling, echo = FALSE , fig.cap  = "Modelling tab of the Shiny app.", fig.width = 12, warnings = FALSE, error = FALSE, message = 'hide'}
-knitr::include_graphics("imgs/shinyModelling.png")
-```
+
+![]("imgs/shinyModelling.png)
+
 
 ## Simulation tab
 
@@ -102,9 +101,8 @@ deviation of the generated response, the desired EDp, and the models which
 should be used in the simulation study are needed to be specified. he following
 figure shows an example of specifying different arguments for simulation.
 
-```{r shinySim1, echo = FALSE , fig.cap  = "Specifying different arguments in the Simulation tab of the Shiny app.", fig.width = 12, warnings = FALSE, error = FALSE, message = 'hide'}
-knitr::include_graphics("imgs/shinySim1.png")
-```
+
+![]("imgs/shinySim1.png)
 
 Once all arguments are correctly specified, clicking on Run simulation button
 will begin the simulation task. As one can see in the following figure,
@@ -112,6 +110,7 @@ once the simulation task is complete, one can select a measure to produce the
 heatmap which summarizes the simulation results.
 
 
-```{r shinySim2, echo = FALSE , fig.cap  = "Summaryzing the results in the Simulation tab of the Shiny app.", fig.width = 12, warnings = FALSE, error = FALSE, message = 'hide'}
-knitr::include_graphics("imgs/shinySim2.png")
-```
+
+
+![]("imgs/shinySim2.png)
+
