@@ -1,0 +1,88 @@
+---
+---
+
+<link rel="stylesheet" href="styles.css" type="text/css">
+
+
+Depending on the underlying pattern of the dose-response curve, there are two
+functions to cluster the dose-response patterns. In case we know the pattern
+should be monotone (like nuclear area in our DILI dataset), the the function
+`monotonePatternClustering` should be used. For cases where no such information
+is available (i.e., the pattern could be monotone, umbrella-shaped, etc.), one
+may use the function `generalPatternClustering`. 
+
+## Clustering subjects with a general pattern
+
+In order to perform clustering, first of all, we need to transorm our data into
+the right format for clustering. As it is already mentioned, this can be done
+using `inputDataMaker`. Its output can be used to specify many arguments in
+`generalPatternClustering` as we can see in the following command.
+
+Furthermore, one needs to determine the way of treating missing data. The
+subjects with missing data can either be ignored (`na.rm = TRUE`, not
+recommended), or simply replaced by the mean (`imputationMethod = "mean"`) or
+median (`imputationMethod = "median"`) of the observed responses for the
+dose-level with missing values.  
+
+The `ORICC` argument determines which of one-stage or two-stage ORICC (or both)
+should be used. Argument `transform` makes it possible to perform some usual
+transformations on the response  (as the response is already transformed we set
+this to `none`). The argument `plotFormat` is is a leftover from `ORIClust`
+package which save a figure of the identified patterns. 
+
+`LRT` and `MCT` are determining whether likelihood ratio test (LRT) or multiple
+comparisons test (MCT) should be applied or not. The adjustment method for
+multiplicity can be specified using the argument `adjustMethod`. LRT is a
+permutation test, the number of permutations can be set via  `nPermute`. It is
+obvious that when `LRT = FALSE` the value of this argument does not matter. A
+seed can be spefied using `useSeed`. 
+
+The argument `theLeastNumberOfMethods` determines the smallest number of methods
+which should approve a pattern to be non-flat so that subject can be selected.
+Let us give an example, suppose we specify `ORICC = "two"`, also `LRT = TRUE`,
+and `MCT = TRUE`. As it is already described, only compounds which are
+identified as non-flat by ORICC will be passed to LRT or MCT, so the possible
+outcomes of these 3 methods could be (0: not-selected, 1: selected):
+
+```{r, echo = FALSE, eval = FALSE}
+toShow0 <- matrix(c(0 , 1, 1, 1, 1, 0, 0, 1, 0 ,1, 0, 0, 0, 1, 1), 5, 3)
+toShow <- cbind(toShow0, apply(toShow0, 1, sum))
+colnames(toShow) = c("ORICC2", "LRT", "MCT", "Sum")
+rownames(toShow) = c("Case1", "Case2", "Case3", "Case4", "Case5")
+kableExtra::kable(toShow)
+```
+
+Now, `theLeastNumberOfMethods = 3` would accept a non-flat dose-response curve
+only if all 3 criteria accepts it, `theLeastNumberOfMethods = 2` would do that
+if at least two of them accepts it, and so on. The level of significance for
+different tests is specified by `alpha`. In case of very large datasets, one can
+use more than one core of their system using `nCores`, the maximum possible
+value here is the maximum number of cores.
+
+```{r, eval = FALSE}
+generalClust <- generalPatternClustering(inputData = inputData1$inputData, colsData = inputData1$colsData, colID = inputData1$colID, doseLevels = inputData1$doseLevels, numReplications = inputData1$numReplicates, na.rm = FALSE, imputationMethod = "mean", ORICC = "two", transform = "none", plotFormat = "eps", LRT = FALSE, MCT = TRUE, adjustMethod = "BH", nPermute = 1000, useSeed = NULL, theLeastNumberOfMethods = 2, alpha = 0.05, nCores = 1)
+```
+
+The outcome of this function is a list providing the `selectedSubjects`, as well
+as results of ORICC1 and ORICC2 (if they are requested), included LRT and MCT
+results.
+
+
+## Clustering subjects with a monotone pattern
+
+
+Imagine we know that our dose-response data should follow a monotone pattern, in
+such a case one needs to use the following command for clustering dose-response
+patterns:
+
+```{r, eval = FALSE}
+monotoneClust <- monotonePatternClustering(inputData = inputData1$inputData, colsData = inputData1$colsData, colID = inputData1$colID, doseLevels = inputData1$doseLevels, numReplications = inputData1$numReplicates, transform = "none", BHorBY = TRUE, SAM = FALSE, testType = c("E2", "Williams", "Marcus", "M", "ModifM"), adjustType = "BH", FDRvalue = c(0.05, 0.05), nPermute= c(1000, 1000), fudgeSAM = "pooled", useSeed = c(NULL, NULL), theLeastNumberOfTests = 5, na.rm = FALSE, imputationMethod = "mean")
+```
+The first few arguments are the same as in the `generalPatternClustering`. The
+argument `BHorBY` asks for performing monotonicity tests specified in `testType`
+adjusted for multiplicty using `BH` or `BY` methods. The `adjustType` then
+specified the multiplicity adjustment method for monotonicty tests.
+`theLeastNumberOfTests` is the same as in `generalPatternClustering`, but now it
+applies on the tests specified in `testType`. IF it suits, it is also possible
+to perform a SAM procedure (`SAM = TRUE`). 
+

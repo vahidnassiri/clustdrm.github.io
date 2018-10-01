@@ -1,0 +1,17 @@
+---
+---
+
+<link rel="stylesheet" href="styles.css" type="text/css">
+
+
+The R package `clustDRM` implements the methods discussed in this guideline.
+There are three main functionalities considered in this package:
+
+* clustering dose-response data based on their pattern
+* Fitting models to dose-response data based on a given pattern
+* Perform simulations based on a pilot dataset to find the best combination of
+  dose-levels/number of replication per dose.
+  
+The following we try to go over each of this examples. For the sake of
+illustration, a small part of the DILI dataset discussed this guideline is
+selected.

@@ -1,0 +1,29 @@
+---
+---
+
+<link rel="stylesheet" href="styles.css" type="text/css">
+
+
+The function `simulEvalDRM` can be used to perform the described simulation task
+as follows:
+
+```{r}
+simResults <- simulEvalDRM(pilotData = inputDataset[inputDataset$ID == 2, c(3, 4)], doseLevels = c(0, 5, 10), numReplications = c(8, 4, 4), numSim = 10, standardDeviation = 0.5, EDp = 0.5, funcList = c("linear", "linlog", "exponential", "emax", "sigEmax", "logistic", "betaMod","quadratic"), quantity2Plot = "mse") 
+```
+
+The `pilotData` is a 2-column matrix (or data frame) with the numeric doses as
+its first column and the response as its second column. This pilot data will be
+used to estimate different parameters of each of the models which should be used
+in the simulations. The models can be specied via `funcList`. The other
+arguments are `doseLevels` which is a vector determining the numeric doses, with
+numer of replcation per dose given by `numReplications`. The number of
+replications of the simulation study is specified in `numSim`, and the response
+standard deviation can be given using `standardDeviation`. The desired EDp is
+given via `EDp`, the default is ED50. One needs to specify the quantity of
+interest, this should be selected from
+`("mean", "bias", "mse", "variance", "relativeBias", "absBias", "absRelativeBias")`.
+
+The outcome of `simulEvalDRM` is an object of class `simulDRM`. The `plot`
+method for an object of this class would produce a heatmap to summarize the
+simulation results. 
+				

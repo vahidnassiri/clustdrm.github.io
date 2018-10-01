@@ -1,0 +1,47 @@
+---
+---
+
+<link rel="stylesheet" href="styles.css" type="text/css">
+
+
+After filtering out the flat dose-response patterns and identifying the patterns
+for non-flat ones (monotone and umbrealla-shaped), one can use the function
+`fitDRM` to fit dose-response models as follows:
+
+```{r}
+fittedModel <- fitDRM (inputDataset, dose = 3, response = 4, ID = 2, subsettingID = generalClust$selectedSubjects$ID, transform = "none", addCovars = ~1, patternClusters = generalClust$selectedSubjects$pattern, EDp = 0.5, addCovarsVar = TRUE, alpha = 0.05, na.rm = FALSE, imputationMethod = "mean", nCores = 1)
+```
+
+the `inputDataset` as well as, columns indicating dose (numeric), response, and
+ID should be provided (their name or number). Optionally, one can prvide a
+subset of `inputDataset` (their ID's) to be considered. `patternClusters` can be
+give manually, but we strongly recommend to use the output of one of our
+clustering functions here. `addCovars` can be used to specify any added
+covariates which the model should be corrected for them. For example, here we
+have included row and column effects. This should be entered as a formula.
+`addCovarsVar = TRUE` will proivde the standard error of the estimated effect of
+each covariate. In case of model averaging, the following expression from
+Buckland et al. (1997) is used to combine the results fro mdifferent models:
+
+   $$\widehat{\mathrm{var}} (\widehat{\theta}_{MA})= \left(\sum_{j=1}^L w_j \sqrt{\widehat{\mathrm{var}}(\widehat{\theta}_r) + (\widehat{\theta}_r - \widehat{\theta}_{MA})^2}
+\right)^2,$$
+
+where $w_j$ are AIC-weights, $\widehat{\theta}_{MA}$ is the parameter estimated
+using model-averaging, and
+$(\widehat{\theta}_r, \widehat{\mathrm{var}}(\widehat{\theta}_r))$ are estimated
+parameter and its variance using $r$th model.
+
+
+The `fitDRM` function itself will ignore any compound with flat or complete
+patterns. But we would suggest to take a second look at compounds with complete
+patterns. It is sometimes possible that a manual evaluation categorizes such
+compounds to have monotone or umbrella-shaped patterns. 
+
+
+The outcome of this function is a list. All the fitted models can be obtained
+via `fittedModels`. The estimated AIC's and EDp's for monotone and non-monotone
+comopounds for different candidate models, as well as minimum-AIC and
+model-averaging can be obtained using `estAICNonmonotone`, `estEDpNonmonotone`,
+`estAICMonotone`, and `estEDpMonotone`. The results regarding the added
+covariates can be obtained from `extraCovarsMonotone` and
+`extraCovarsNonmonotone`.

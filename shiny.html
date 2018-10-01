@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>shiny.utf8.md</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 64px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+
+.section h2 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h3 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h4 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h5 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h6 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">clustDRM</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Introduction</a>
+</li>
+<li>
+  <a href="dataEntry.html">Data entry</a>
+</li>
+<li>
+  <a href="plot.html">Plotting data</a>
+</li>
+<li>
+  <a href="custering.html">Clustering</a>
+</li>
+<li>
+  <a href="fittingModels.html">Fitting models</a>
+</li>
+<li>
+  <a href="simulation.html">Simulation</a>
+</li>
+<li>
+  <a href="shiny.html">Shiny app</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="contact.html">
+    <span class="fa fa-envelope fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<p><link rel="stylesheet" href="styles.css" type="text/css"></p>
+<p>In order to make the use of different functionalities of <code>clustDRM</code> package easier, an R-Shiny app is developed. The app can be lauched using the following command:</p>
+<pre class="r"><code>clustDRMapp()</code></pre>
+<p>The Shiny app has 4 main tabs corresponding to the main functionalities of <code>clustDRM</code>: Data, Clustering, Modelling, and Simulation.</p>
+<div id="data-tab" class="section level2">
+<h2>Data tab</h2>
+<p>The Data tab can be used to upload the dataset. It should be a <code>.csv</code> file in a correct format. The following figure shows the first view after running the Shiny app.</p>
+<div class="figure">
+<img src="imgs/shinyFirst.png" alt="First view of the Shiny app after running." width="588" />
+<p class="caption">
+First view of the Shiny app after running.
+</p>
+</div>
+<p>After uploading a <code>.csv</code> data file via the Data tab, one needs to select the columns in the data corresponding to the name of the variables, also ID, dose, and response, as well as the added covariates (if any). After uploading the data, a table will show the dataset. By clicking on each row of this table the corresponding dose-response data will be plotted. Note that a jitter boxplot is used here, so plotting the same compound another time would produce slightly different results. The following figure shows an example of using Data tab.</p>
+<div class="figure">
+<img src="imgs/shinyData.png" alt="Data tab of the Shiny app." width="916" />
+<p class="caption">
+Data tab of the Shiny app.
+</p>
+</div>
+</div>
+<div id="clustering-tab" class="section level2">
+<h2>Clustering tab</h2>
+<p>Once the data are uploaded, and dose and response columns are identified, one can proceed to clustering tab. Three components should be specified in this tab. First: whether the response is known to be monotone or not, second: the type of transform to be applied on the response, and finally, third: the level of significance.</p>
+<p>By clicking the Perform clustering button, the clustering will be performed. It might take several minutes depedning on the size of the dataset. In case of general pattern clustring, the computations will be done in parallel using one less than the number of available cores.</p>
+<p>Upon finishing the clustering, a table will be diaplyed on the screen with the clustering results. By clicking on each row of this table the dose-response data will be plotted using jitter boxplots with displayed means estimated based on the identified patterns. The following figure shows the use of this tab.</p>
+<div class="figure">
+<img src="imgs/shinyClustering.png" alt="Clustering tab of the Shiny app." width="914" />
+<p class="caption">
+Clustering tab of the Shiny app.
+</p>
+</div>
+<p>Note that, some arguments are pre-specified in the Shiny app while using the functions available via the <code>clustDRM</code> package they can be customized. For the Shiny app, in case of monotone compounds, only <code>E2</code> test is performed. For the general patterns we use <code>ORICC2</code> followed by only <code>MCT</code>, and <code>theLeastNumberOfMethods = 2</code>, i.e., the non-flat identified patterns should be approved by MCT as well.</p>
+</div>
+<div id="modelling-tab" class="section level2">
+<h2>Modelling tab</h2>
+<p>Having the clustering results, one can move on to the Modelling tab. It requires the <span class="math inline">\(p\)</span> in EDp to be selected (delfault is 0.5, i.e., ED50), as an optional feature, one can give the toxic dose threshold. If the EDp is estimated smaller than this threshold, then the compound is considered as toxic. Clicking on Estimate EDp button will begin the modelling task. Here also, one minus the number of available cores will be used to perform computations.</p>
+<p>Once it is over, a table with estimated EDp will be displayed on the screen. If a threshold is specified, then an extra column will show if each compound is toxic or not. Again, by clicking on each row of the table a jitter box-plot of dose-response data will be displayed with a vertical line indicating the estimated EDp. The following figure shows an example of the use of this tab.</p>
+<div class="figure">
+<img src="imgs/shinyModelling.png" alt="Modelling tab of the Shiny app." width="924" />
+<p class="caption">
+Modelling tab of the Shiny app.
+</p>
+</div>
+</div>
+<div id="simulation-tab" class="section level2">
+<h2>Simulation tab</h2>
+<p>The Simulation tab can be used to perform the described simulation study. For that, one needs to first select one of the compounds in the uploaded dataset as the pilot data, then the dose levels and number of replications per dose should be entered. This can be done using comma delimited text. For example, if one is interested to have dose 0 mg with 10 replications, 10 mg with 5 replications, and 25 mg with 5 replications, then these should be entered as <code>0, 10, 25</code> for dose-levels and <code>10, 5, 5</code> for number of replications.</p>
+<p>Furthermore, the number of replications of the simulation study, the standard deviation of the generated response, the desired EDp, and the models which should be used in the simulation study are needed to be specified. he following figure shows an example of specifying different arguments for simulation.</p>
+<div class="figure">
+<img src="imgs/shinySim1.png" alt="Specifying different arguments in the Simulation tab of the Shiny app." width="318" />
+<p class="caption">
+Specifying different arguments in the Simulation tab of the Shiny app.
+</p>
+</div>
+<p>Once all arguments are correctly specified, clicking on Run simulation button will begin the simulation task. As one can see in the following figure, once the simulation task is complete, one can select a measure to produce the heatmap which summarizes the simulation results.</p>
+<div class="figure">
+<img src="imgs/shinySim2.png" alt="Summaryzing the results in the Simulation tab of the Shiny app." width="892" />
+<p class="caption">
+Summaryzing the results in the Simulation tab of the Shiny app.
+</p>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

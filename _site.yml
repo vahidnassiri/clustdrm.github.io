@@ -1,0 +1,31 @@
+# TODO: Add comment
+# 
+# Author: Vahid Nassiri
+###############################################################################
+
+name: "clustDRM"
+output_dir: "."
+navbar:
+  title: "clustDRM"
+  left:
+    - text: "Introduction"
+      href: index.html
+    - text: "Data entry"
+      href: dataEntry.html
+    - text: "Plotting data"
+      href: plot.html
+    - text: "Clustering"
+      href: custering.html
+    - text: "Fitting models"
+      href: fittingModels.html
+    - text: "Simulation"
+      href: simulation.html
+    - text: "Shiny app"
+      href: shiny.html
+  right:
+    - icon: fa-envelope fa-lg
+      href: contact.html
+output:
+  html_document:
+    theme: paper
+    css: 'styles.css'

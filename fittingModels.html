@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>fittingModels.utf8.md</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 64px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+
+.section h2 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h3 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h4 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h5 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h6 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">clustDRM</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Introduction</a>
+</li>
+<li>
+  <a href="dataEntry.html">Data entry</a>
+</li>
+<li>
+  <a href="plot.html">Plotting data</a>
+</li>
+<li>
+  <a href="custering.html">Clustering</a>
+</li>
+<li>
+  <a href="fittingModels.html">Fitting models</a>
+</li>
+<li>
+  <a href="simulation.html">Simulation</a>
+</li>
+<li>
+  <a href="shiny.html">Shiny app</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="contact.html">
+    <span class="fa fa-envelope fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<p><link rel="stylesheet" href="styles.css" type="text/css"></p>
+<p>After filtering out the flat dose-response patterns and identifying the patterns for non-flat ones (monotone and umbrealla-shaped), one can use the function <code>fitDRM</code> to fit dose-response models as follows:</p>
+<pre class="r"><code>fittedModel &lt;- fitDRM (inputDataset, dose = 3, response = 4, ID = 2, subsettingID = generalClust$selectedSubjects$ID, transform = &quot;none&quot;, addCovars = ~1, patternClusters = generalClust$selectedSubjects$pattern, EDp = 0.5, addCovarsVar = TRUE, alpha = 0.05, na.rm = FALSE, imputationMethod = &quot;mean&quot;, nCores = 1)</code></pre>
+<p>the <code>inputDataset</code> as well as, columns indicating dose (numeric), response, and ID should be provided (their name or number). Optionally, one can prvide a subset of <code>inputDataset</code> (their ID’s) to be considered. <code>patternClusters</code> can be give manually, but we strongly recommend to use the output of one of our clustering functions here. <code>addCovars</code> can be used to specify any added covariates which the model should be corrected for them. For example, here we have included row and column effects. This should be entered as a formula. <code>addCovarsVar = TRUE</code> will proivde the standard error of the estimated effect of each covariate. In case of model averaging, the following expression from Buckland et al. (1997) is used to combine the results fro mdifferent models:</p>
+<p><span class="math display">\[\widehat{\mathrm{var}} (\widehat{\theta}_{MA})= \left(\sum_{j=1}^L w_j \sqrt{\widehat{\mathrm{var}}(\widehat{\theta}_r) + (\widehat{\theta}_r - \widehat{\theta}_{MA})^2}
+\right)^2,\]</span></p>
+<p>where <span class="math inline">\(w_j\)</span> are AIC-weights, <span class="math inline">\(\widehat{\theta}_{MA}\)</span> is the parameter estimated using model-averaging, and <span class="math inline">\((\widehat{\theta}_r, \widehat{\mathrm{var}}(\widehat{\theta}_r))\)</span> are estimated parameter and its variance using <span class="math inline">\(r\)</span>th model.</p>
+<p>The <code>fitDRM</code> function itself will ignore any compound with flat or complete patterns. But we would suggest to take a second look at compounds with complete patterns. It is sometimes possible that a manual evaluation categorizes such compounds to have monotone or umbrella-shaped patterns.</p>
+<p>The outcome of this function is a list. All the fitted models can be obtained via <code>fittedModels</code>. The estimated AIC’s and EDp’s for monotone and non-monotone comopounds for different candidate models, as well as minimum-AIC and model-averaging can be obtained using <code>estAICNonmonotone</code>, <code>estEDpNonmonotone</code>, <code>estAICMonotone</code>, and <code>estEDpMonotone</code>. The results regarding the added covariates can be obtained from <code>extraCovarsMonotone</code> and <code>extraCovarsNonmonotone</code>.</p>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

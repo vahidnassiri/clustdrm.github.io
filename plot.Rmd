@@ -1,0 +1,34 @@
+---
+---
+
+<link rel="stylesheet" href="styles.css" type="text/css">
+
+Although the `clustDRM` package is designed to make the dose-response modelling
+process in an automatic way, but it is always useful to have a visual
+representation of dose-response relation of some of the compounds. The function
+`plotDoseResponseData` can be used to plot the dose-response data for a given
+subject:
+
+```{r drcplotMean, echo = FALSE , fig.cap  = "Plotting dose-response pattern for compound with ID = 6 with dose-specific means.", fig.height=6, warnings = FALSE, error = FALSE, message = 'hide', results='hide'}
+
+plotDoseResponseData (inputDataset, dose = 3, response = 4, ID = 2, subjectID = 6, xlab = "Dose", ylab = "response", addMean = TRUE, drcPattern = NULL)
+```
+
+The argument `addMean` will compute the dose-specific mean of the response and
+connect them using a line plot. In case one had a pattern identified for the
+dose-response curve, it can be given to the function via the argument
+`drcPattern`. It accepts all usual pattern terms such as `increasing`,
+`decreasing`, `up down max at 2`, etc. Providing the `drcPattern`, the response
+mean per dose will be estimated for the identifed pattern. We strongly suggest
+to use the output of the clustering functions here to make sure a correctly
+identified pattern (and with a correct wording) is used.
+
+Just for illustration purpose, imagine the identified pattern for compound with
+ID = 6 is `increasing`:
+
+```{r drcplotPattern, echo = FALSE , fig.cap  = "Plotting dose-response pattern for compound with ID = 6 with dose-specific means estimated based on the identified pattern.", fig.height=6, warnings = FALSE, error = FALSE, message = 'hide', results='hide'}
+
+plotDoseResponseData (inputDataset, dose = 3, response = 4, ID = 2, subjectID = 6, xlab = "Dose", ylab = "response", 
+		addMean = FALSE, drcPattern = "increasing")
+
+```

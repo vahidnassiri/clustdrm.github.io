@@ -1,0 +1,48 @@
+---
+---
+
+<link rel="stylesheet" href="styles.css" type="text/css">
+
+The initial step to use the `clustDRM` package is to make sure a correctly
+formatted dataset is fed to different functions.
+
+For illustration purposes, we simulate dose-response data from a linear model:
+
+```{r}
+## Generating a sample for 20 subjects
+genData0 <- MCPMod::genDFdata("linear",c(-4, 1), 
+		c(0, 5, 10), rep(5, 3), 1)
+genData <- data.frame(rep(1, nrow(genData0)), genData0)
+colnames(genData)[1] <- "ID"
+for (iSim in 2:10){
+	genData0 <- MCPMod::genDFdata("linear",c(-4, 1), 
+			c(0, 5, 10), rep(5, 3), 1)
+	genDatatmp <- data.frame(rep(iSim, nrow(genData0)), genData0)
+	colnames(genDatatmp)[1] <- "ID"
+	genData <- rbind(genData, genDatatmp)
+}
+write.csv(genData, "sampleData.csv")
+
+inputDataset <- read.csv("sampleData.csv")
+head(inputDataset)
+```
+
+While a dataset with such a format is appropriate for modelling purposes, the
+clustering functions would need the data in the so-called long-format, where
+each row of data contains the responses for all different dose-replications. The
+function `inputDataMaker` would make this transform easily possible. One needs
+to give the inputDataset, as well as the columns corresponding to dose (in
+numeric format), response, and ID. This can be the number of the column, or its
+name or a combination of these two. All the three following commands will be
+produce the same results.
+
+```{r}
+inputData1 <- inputDataMaker(3, 4, 2, inputDataset)
+inputData2 <- inputDataMaker("dose", "resp", "ID", inputDataset)
+inputData3 <- inputDataMaker(2, "resp", 1, inputDataset)
+
+```
+
+The outcome of the function `inputDataMaker` provides the transformed dataset, 
+as well as the unique doses in the study, and number of replications per dose.
+The columns correspond to the data (responses) and ID are also provided.
